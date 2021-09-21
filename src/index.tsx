@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './styles/base.scss';
 import Products from './pages/products/products';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+    uri: 'https://pangaea-interviews.vercel.app/api/graphql',
+    cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
     <React.StrictMode>
-        <Products />
+        <ApolloProvider client={client}>
+            <Products />
+        </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
