@@ -1,0 +1,9 @@
+.productpage_section {
+    padding: 6rem 5rem;
+}
+
+.productpage__products {
+    background: #e2e6e3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

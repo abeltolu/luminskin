@@ -1,0 +1,18 @@
+ul.navmenu {
+    display: inline-flex;
+    align-items: center;
+
+    li {
+        a {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            &:hover {
+                color: #3d5b57;
+            }
+        }
+    }
+
+    :not(:last-child) {
+        margin-right: 0.5rem;
+    }
+}

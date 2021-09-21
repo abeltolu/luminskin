@@ -1,0 +1,11 @@
+.cartcount {
+    display: flex;
+    position: relative;
+    img {
+        height: 22px;
+    }
+    span.total-items {
+        font-size: 0.9rem;
+        line-height: 0.1rem;
+    }
+}

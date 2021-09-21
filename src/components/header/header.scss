@@ -1,0 +1,43 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2.5rem;
+    box-shadow: 0 2px 3px -3px grey;
+
+    .header__left,
+    .header__right {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .header__left {
+        .logo {
+            display: flex;
+            img {
+                height: 44px;
+            }
+        }
+
+        > {
+            :not(:last-child) {
+                margin-right: 1.5rem;
+            }
+        }
+    }
+
+    .header__right {
+        > {
+            :not(:last-child) {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    &.sticky {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        background-color: #fff;
+    }
+}
