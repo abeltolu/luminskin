@@ -4,7 +4,7 @@ import './productitem.scss';
 interface IProductItemProps {
     imageUrl: string;
     title: string;
-    price: string;
+    price: string | number;
     currencyCode: string;
 }
 

@@ -1,9 +1,14 @@
 .productpage_section {
-    padding: 6rem 5rem;
+    padding: 6rem 0rem;
+    margin: 0 auto;
+    max-width: 1400px;
 }
 
 .productpage__products {
     background: #e2e6e3;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    .products_list {
+        padding: 3rem 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
