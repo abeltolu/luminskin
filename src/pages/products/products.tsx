@@ -8,7 +8,6 @@ import './products.scss';
 
 function Products() {
     const { data, loading, error } = useProducts({ currency: 'USD' });
-    console.log({ data });
     return (
         <StickyHeaderLayout>
             <Header isSticky />
