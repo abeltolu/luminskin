@@ -1,13 +1,19 @@
+import { useState } from 'react';
+import { Drawer } from '../../components/drawer/drawer';
 import { Header } from '../../components/header/header';
 import { PageHeader } from '../../components/header/pageheader/pageheader';
 import { StickyHeaderLayout } from '../../components/layout/sticky/stickyheader.layout';
 import { ProductItem } from '../../components/product/productitem';
 import { SelectBox } from '../../components/select/selectbox';
+import { Cart } from '../../connected/cart/cart';
 import { useProducts } from '../../hooks/useProducts';
+import { cartItemMutations } from '../../operations/mutations/cart';
 import './products.scss';
 
 function Products() {
     const { data, loading, error } = useProducts({ currency: 'USD' });
+    const [productId, setProductId] = useState<number | null>(null);
+    const { addCartItem } = cartItemMutations;
     return (
         <StickyHeaderLayout>
             <Header isSticky />
@@ -37,15 +43,24 @@ function Products() {
                         ? data.products.map((product) => (
                               <ProductItem
                                   key={product.id}
-                                  imageUrl={product.image_url}
+                                  image_url={product.image_url}
                                   title={product.title}
                                   price={product.price}
                                   currencyCode={'USD'}
+                                  onAddToCart={() => addCartItem(product.id)}
                               />
                           ))
                         : null}
                 </div>
             </div>
+
+            <Drawer
+                show={!!productId}
+                onClose={() => setProductId(null)}
+                headerFragment={null}
+            >
+                <Cart />
+            </Drawer>
         </StickyHeaderLayout>
     );
 }

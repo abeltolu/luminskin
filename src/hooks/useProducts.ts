@@ -2,6 +2,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Query, Currency } from '../@types/Product';
 import { apolloClient } from '../services/apollo';
 
+//Get All Products from Server
 const PRODUCTS_QUERY = gql`
     query GetProducts($currency: Currency!) {
         products {
@@ -21,15 +22,6 @@ const PRODUCTS_QUERY = gql`
         }
     }
 `;
-
-const READ_PRODUCT = gql`
-    fragment ProductItem on Product {
-        id
-        title
-        image_url
-    }
-`;
-
 interface IUseProductsProps {
     currency: keyof typeof Currency;
 }
@@ -39,6 +31,15 @@ export function useProducts({ currency }: IUseProductsProps) {
     });
     return { data, loading, error };
 }
+
+//Get Cached Product By ID
+const READ_PRODUCT = gql`
+    fragment ProductItem on Product {
+        id
+        title
+        image_url
+    }
+`;
 
 interface IUseProductProps {
     productId: number;

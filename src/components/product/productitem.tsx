@@ -1,30 +1,30 @@
+import { Product } from '../../@types/Product';
 import { Button } from '../button/button';
 import './productitem.scss';
 
-interface IProductItemProps {
-    imageUrl: string;
-    title: string;
-    price: string | number;
+interface IProductItemProps extends Partial<Product> {
     currencyCode: string;
+    onAddToCart: () => void;
 }
 
 export const ProductItem = ({
-    imageUrl,
+    image_url,
     title,
     price,
     currencyCode,
+    onAddToCart,
 }: IProductItemProps) => {
     return (
         <div className="productitem">
             <div className="productitem__image">
-                <img src={imageUrl} alt={title} />
+                <img src={image_url} alt={title} />
             </div>
             <div className="productitem__details">
                 <div className="priceinfo">
                     <h2 className="title">{title}</h2>
                     <span className="price">{`${currencyCode} ${price}`}</span>
                 </div>
-                <Button>Add to Cart</Button>
+                <Button onClick={onAddToCart}>Add to Cart</Button>
             </div>
         </div>
     );

@@ -34,6 +34,8 @@ export type Product = {
     product_options: Array<ProductOption>;
 };
 
+export type ProductInCart = Partial<Product> & { quantity: number };
+
 export type ProductPriceArgs = {
     currency?: Maybe<Currency>;
 };
