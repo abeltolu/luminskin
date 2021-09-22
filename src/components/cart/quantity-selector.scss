@@ -1,0 +1,30 @@
+.quantity-selector-container {
+    border: 1px solid #bcbcbc;
+    padding: 0.5rem;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 70px;
+
+    span.action {
+        font-size: 0.8rem;
+        line-height: 1rem;
+        color: #000;
+        cursor: pointer;
+        min-width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    span.number {
+        font-size: 1rem;
+        line-height: 1.2rem;
+        color: #000;
+        min-width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
