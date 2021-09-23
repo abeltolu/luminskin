@@ -1,6 +1,6 @@
 import { InMemoryCache, ReactiveVar, makeVar } from '@apollo/client';
 import { CartItems } from '../@types/Cart';
-import { CurrencyType } from '../@types/Product';
+import { CurrencyType, Product } from '../@types/Product';
 
 export const cache: InMemoryCache = new InMemoryCache({
     typePolicies: {
@@ -29,3 +29,4 @@ export const cache: InMemoryCache = new InMemoryCache({
 export const cartItemsVar: ReactiveVar<CartItems> = makeVar<CartItems>([]);
 export const currencyVar = makeVar<CurrencyType>('USD');
 export const showCartDrawerVar = makeVar<boolean>(false);
+export const allProductsVar = makeVar<Product[]>([]);
