@@ -49,9 +49,7 @@ function Products() {
                         ? data.products.map((product) => (
                               <ProductItem
                                   key={product.id}
-                                  image_url={product.image_url}
-                                  title={product.title}
-                                  price={product.price}
+                                  {...product}
                                   currencyCode={currency}
                                   onAddToCart={() => {
                                       addCartItem(product.id);

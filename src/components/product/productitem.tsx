@@ -1,9 +1,10 @@
-import { Product } from '../../@types/Product';
+import { CurrencyType, Product } from '../../@types/Product';
+import { formatPriceByCurrency } from '../../utils/product';
 import { Button } from '../button/button';
 import './productitem.scss';
 
-interface IProductItemProps extends Partial<Product> {
-    currencyCode: string;
+interface IProductItemProps extends Omit<Product, '__typename'> {
+    currencyCode: CurrencyType;
     onAddToCart: () => void;
 }
 
@@ -22,7 +23,9 @@ export const ProductItem = ({
             <div className="productitem__details">
                 <div className="priceinfo">
                     <h2 className="title">{title}</h2>
-                    <span className="price">{`${currencyCode} ${price}`}</span>
+                    <span className="price">
+                        {formatPriceByCurrency(price, currencyCode)}
+                    </span>
                 </div>
                 <Button onClick={onAddToCart}>Add to Cart</Button>
             </div>

@@ -1,8 +1,9 @@
 import { Product, CurrencyType } from '../../@types/Product';
 import { QuantitySelector } from './quantity-selector';
 import './cartitem.scss';
+import { formatPriceByCurrency } from '../../utils/product';
 
-interface ICartItem extends Partial<Product> {
+interface ICartItem extends Omit<Product, '__typename'> {
     quantity: number;
     currency: CurrencyType;
     onIncrementQuantity: () => void;
@@ -29,7 +30,9 @@ export const CartItem: React.FC<ICartItem> = ({
                             onIncrement={onDecrementQuantity}
                         />
                     </div>
-                    <span className="product-price">{`${currency} ${price}`}</span>
+                    <span className="product-price">
+                        {formatPriceByCurrency(price, currency)}
+                    </span>
                 </div>
             </div>
             <div className="product-image">
