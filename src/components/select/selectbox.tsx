@@ -1,4 +1,5 @@
 import { SelectHTMLAttributes } from 'react';
+import classnames from 'classnames';
 import './selectbox.scss';
 
 type OptionItem = {
@@ -8,10 +9,14 @@ type OptionItem = {
 interface ISelectBoxProps extends SelectHTMLAttributes<HTMLSelectElement> {
     options: OptionItem[];
 }
-export const SelectBox = ({ options, ...props }: ISelectBoxProps) => {
+export const SelectBox = ({
+    options,
+    className,
+    ...props
+}: ISelectBoxProps) => {
     if (!options || !options.length) return null;
     return (
-        <select {...props} className="selectbox">
+        <select {...props} className={classnames('selectbox', className)}>
             {options.map((option, index) => (
                 <option key={index} value={option.value}>
                     {option.label}

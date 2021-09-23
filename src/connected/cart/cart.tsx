@@ -1,22 +1,29 @@
-import { useQuery, useReactiveVar } from '@apollo/client';
 import { SelectBox } from '../../components/select/selectbox';
-import { GET_CART_ITEMS } from '../../operations/queries/cart';
-import { cartItemsVar } from '../../services/cache';
+import { useCartItems } from '../../hooks/useCartItems';
+import { ConnectedCartItem } from './cartitem';
 import './cart.scss';
-import { CartItem } from './cartitem';
+import { useCurrency } from '../../hooks/useCurrency';
+import { CurrencyType } from '../../@types/Product';
 
 export const Cart = () => {
-    //const cartItemsQueryResult = useQuery(GET_CART_ITEMS);
-    const cartItemsQueryResult = useReactiveVar(cartItemsVar);
-    console.log({ cartItemsQueryResult });
+    const { cartItems } = useCartItems();
+    const { currency, currenciesMap, updateCurrency } = useCurrency();
     return (
         <div className="cart-container">
-            <div className="cart-container__body">
+            <div className="cart-container__head">
                 <SelectBox
-                    className=""
-                    options={[{ label: 'NGN', value: 'NGN' }]}
+                    className="currency-selector"
+                    defaultValue={currency}
+                    options={currenciesMap}
+                    onChange={(e) => {
+                        updateCurrency(e.target.value as CurrencyType);
+                    }}
                 />
-                <CartItem />
+            </div>
+            <div className="cart-container__body">
+                {cartItems.map((item) => (
+                    <ConnectedCartItem key={item.id} {...item} />
+                ))}
             </div>
             <div className="cart-container__footer"></div>
         </div>

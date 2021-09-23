@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Drawer } from '../../components/drawer/drawer';
 import { Header } from '../../components/header/header';
 import { PageHeader } from '../../components/header/pageheader/pageheader';
@@ -6,17 +5,24 @@ import { StickyHeaderLayout } from '../../components/layout/sticky/stickyheader.
 import { ProductItem } from '../../components/product/productitem';
 import { SelectBox } from '../../components/select/selectbox';
 import { Cart } from '../../connected/cart/cart';
+import { useCartDrawer } from '../../hooks/useCartDrawer';
+import { useCartItems } from '../../hooks/useCartItems';
+import { useCurrency } from '../../hooks/useCurrency';
 import { useProducts } from '../../hooks/useProducts';
-import { cartItemMutations } from '../../operations/mutations/cart';
 import './products.scss';
 
 function Products() {
-    const { data, loading, error } = useProducts({ currency: 'USD' });
-    const [productId, setProductId] = useState<number | null>(null);
-    const { addCartItem } = cartItemMutations;
+    const { currency } = useCurrency();
+    const { data, loading, error } = useProducts({ currency });
+    const { addCartItem, itemsCount } = useCartItems();
+    const { showCartDrawer, toggleCartDrawer } = useCartDrawer();
     return (
         <StickyHeaderLayout>
-            <Header isSticky />
+            <Header
+                isSticky
+                cartCount={itemsCount}
+                onCartClick={toggleCartDrawer}
+            />
             <div className="productpage_section">
                 <PageHeader
                     title="All Products"
@@ -46,8 +52,11 @@ function Products() {
                                   image_url={product.image_url}
                                   title={product.title}
                                   price={product.price}
-                                  currencyCode={'USD'}
-                                  onAddToCart={() => addCartItem(product.id)}
+                                  currencyCode={currency}
+                                  onAddToCart={() => {
+                                      addCartItem(product.id);
+                                      toggleCartDrawer();
+                                  }}
                               />
                           ))
                         : null}
@@ -55,8 +64,8 @@ function Products() {
             </div>
 
             <Drawer
-                show={!!productId}
-                onClose={() => setProductId(null)}
+                show={showCartDrawer}
+                onClose={toggleCartDrawer}
                 headerFragment={null}
             >
                 <Cart />

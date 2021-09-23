@@ -8,7 +8,7 @@ export default function decrementQuantity(
 ) {
     return (id: number) => {
         const cartItem = getCartItem(cartItemsVar)(id);
-        if (!cartItem || cartItem.quantity === 0) return;
+        if (!cartItem || cartItem.quantity === 1) return;
 
         updateCartItem(cartItemsVar)({
             ...cartItem,

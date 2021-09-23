@@ -192,3 +192,5 @@ export enum Currency {
     ZAR = 'ZAR',
     ZMW = 'ZMW',
 }
+
+export type CurrencyType = keyof typeof Currency;

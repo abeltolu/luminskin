@@ -34,6 +34,7 @@
             -webkit-transform 0.4s cubic-bezier(0.28, 0.47, 0.29, 0.86);
         transform: translateX(100%);
         opacity: 0;
+        overflow: hidden;
 
         .drawer-content__header {
             display: flex;

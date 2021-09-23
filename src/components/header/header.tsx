@@ -7,8 +7,10 @@ import useScroll from '../../hooks/usescroll';
 
 interface IHeaderProps {
     isSticky?: boolean;
+    cartCount?: number;
+    onCartClick?: () => void;
 }
-export const Header = ({ isSticky }: IHeaderProps) => {
+export const Header = ({ isSticky, cartCount, onCartClick }: IHeaderProps) => {
     const { scrollY } = useScroll();
     const headerClass = classnames('header', {
         sticky: isSticky && scrollY >= 100, //show sticky class if isSticky and scroll position equals 100
@@ -28,7 +30,7 @@ export const Header = ({ isSticky }: IHeaderProps) => {
             </div>
             <div className="header__right">
                 <NavMenu links={[{ title: 'Account', url: '/account' }]} />
-                <CartCount count={20} />
+                <CartCount count={cartCount} onClick={onCartClick} />
             </div>
         </header>
     );

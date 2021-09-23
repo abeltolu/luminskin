@@ -1,6 +1,6 @@
-import { useQuery, gql } from '@apollo/client';
-import { Query, Currency } from '../@types/Product';
-import { apolloClient } from '../services/apollo';
+import { useQuery, gql, useApolloClient } from '@apollo/client';
+import { Query, CurrencyType, Product } from '../@types/Product';
+import { useCurrency } from './useCurrency';
 
 //Get All Products from Server
 const PRODUCTS_QUERY = gql`
@@ -23,12 +23,13 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 interface IUseProductsProps {
-    currency: keyof typeof Currency;
+    currency: CurrencyType;
 }
 export function useProducts({ currency }: IUseProductsProps) {
     const { data, loading, error } = useQuery<Query>(PRODUCTS_QUERY, {
         variables: { currency: currency },
     });
+    console.log({ data });
     return { data, loading, error };
 }
 
@@ -38,6 +39,7 @@ const READ_PRODUCT = gql`
         id
         title
         image_url
+        price(currency: $currency)
     }
 `;
 
@@ -45,13 +47,14 @@ interface IUseProductProps {
     productId: number;
 }
 export function useProduct({ productId }: IUseProductProps) {
-    try {
-        const data = apolloClient.readFragment({
-            id: `Product:${productId}`,
-            fragment: READ_PRODUCT,
-        });
-        return { data };
-    } catch (error) {
-        return { data: null };
-    }
+    const apolloClient = useApolloClient();
+    const { currency } = useCurrency();
+    const data = apolloClient.readFragment({
+        id: `Product:${productId}`,
+        fragment: READ_PRODUCT,
+        variables: {
+            currency,
+        },
+    }) as Product;
+    return { data };
 }
