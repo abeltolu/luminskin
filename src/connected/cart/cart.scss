@@ -3,6 +3,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     .cart-container__head {
         display: flex;
@@ -20,7 +22,15 @@
         display: flex;
         flex-direction: column;
         padding: 0.5rem 1.5rem;
-        overflow: scroll;
+        padding-bottom: 2rem;
+        overflow-y: auto;
+
+        .noitems-container {
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.1rem;
+        }
 
         > {
             :not(:last-child) {
@@ -33,5 +43,30 @@
         display: flex;
         flex-direction: column;
         padding: 2rem 1.5rem;
+        box-shadow: 0 -4px 12px rgb(0 0 0 / 15%);
+
+        .subtotal-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+
+            span.subtotal {
+                font-size: 0.8rem;
+                line-height: 1rem;
+            }
+
+            span.total-price {
+                font-size: 1rem;
+                line-height: 1.2rem;
+                color: #000;
+            }
+        }
+
+        button.checkout {
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
     }
 }
