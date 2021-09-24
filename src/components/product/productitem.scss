@@ -5,6 +5,10 @@
     align-items: center;
     padding: 3rem 2rem;
 
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
+
     .productitem__image {
         flex: 1;
         display: flex;
@@ -16,6 +20,11 @@
             object-fit: contain;
             max-height: 170px;
             max-width: 170px;
+
+            @media (max-width: 768px) {
+                max-height: 100px;
+                max-width: 100px;
+            }
         }
     }
 
@@ -30,6 +39,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
 
             h2.title {
                 font-weight: 400;
@@ -44,7 +54,7 @@
             }
 
             :not(:last-child) {
-                margin-bottom: 0.2rem;
+                margin-bottom: 0.5rem;
             }
         }
 

@@ -43,8 +43,12 @@ function Products() {
             </div>
             <div className="productpage__products">
                 <div className="productpage_section products_list">
-                    {loading && !data?.length && 'Loading...'}
-                    {error && !data?.length && 'Error occurred'}
+                    {loading && !data?.length && (
+                        <div className="load_state">Loading...</div>
+                    )}
+                    {error && !data?.length && (
+                        <div className="load_state">Error occurred</div>
+                    )}
                     {!!data
                         ? data.map((product) => (
                               <ProductItem

@@ -2,6 +2,10 @@
     padding: 6rem 0rem;
     margin: 0 auto;
     max-width: 85%;
+    @media (max-width: 768px) {
+        max-width: 100%;
+        padding: 2rem 1rem;
+    }
 }
 
 .productpage__products {
@@ -10,5 +14,16 @@
         padding: 3rem 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+
+        @media (max-width: 768px) {
+            padding: 2rem 0;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .load_state {
+            @media (max-width: 768px) {
+                padding: 1rem;
+            }
+        }
     }
 }
