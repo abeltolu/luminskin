@@ -1,7 +1,6 @@
-import { useQuery, gql, useApolloClient, useReactiveVar } from '@apollo/client';
-import { Query, CurrencyType, Product } from '../@types/Product';
+import { useQuery, gql, useReactiveVar } from '@apollo/client';
+import { Query, CurrencyType } from '../@types/Product';
 import { allProductsVar } from '../services/cache';
-import { useCurrency } from './useCurrency';
 
 //Get All Products from Server
 const ProductDetails = gql`
@@ -46,15 +45,10 @@ export function useProducts({ currency }: IUseProductsProps) {
 }
 
 //Get Cached Product By ID
-const READ_PRODUCT = gql`
+/*const READ_PRODUCT = gql`
     fragment ProductItem on Product ${ProductDetails}
 `;
-
-interface IUseProductProps {
-    productId: number;
-}
-export function useProduct({ productId }: IUseProductProps) {
-    /*const apolloClient = useApolloClient();
+const apolloClient = useApolloClient();
     const { currency } = useCurrency();
     const data = apolloClient.readFragment({
         id: `Product:${productId}`,
@@ -62,8 +56,13 @@ export function useProduct({ productId }: IUseProductProps) {
         variables: {
             currency,
         },
-    }) as Product;*/
+    }) as Product
+*/
 
+interface IUseProductProps {
+    productId: number;
+}
+export function useProduct({ productId }: IUseProductProps) {
     const allProducts = useReactiveVar(allProductsVar);
     const data = allProducts.find((product) => product.id === productId);
     return { data };
